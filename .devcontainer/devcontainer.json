@@ -1,11 +1,19 @@
 {
-  "name": "Node.js & TypeScript",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
-  "runArgs": ["--name", "frontend-study"],
-  "forwardPorts": [3000],
-  "customizations": {
-    "vscode": {
-      "extensions": ["dbaeumer.vscode-eslint"]
-    }
-  }
+	"name": "Node.js & TypeScript",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.vscode-typescript-next",
+				"leizongmin.node-module-intellisense",
+				"mhutchie.git-graph",
+				"eamodio.gitlens"
+			]
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/act:1": {},
+		"ghcr.io/devcontainers-contrib/features/volta:1": {}
+	},
+	"postCreateCommand": "volta setup"
 }

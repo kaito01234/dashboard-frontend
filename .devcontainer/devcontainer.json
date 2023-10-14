@@ -12,7 +12,6 @@
 		}
 	},
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/act:1": {},
 		"ghcr.io/devcontainers-contrib/features/volta:1": {}
 	},
 	"postCreateCommand": "volta setup"

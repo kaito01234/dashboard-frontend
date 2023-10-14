@@ -7,7 +7,8 @@
 				"ms-vscode.vscode-typescript-next",
 				"leizongmin.node-module-intellisense",
 				"mhutchie.git-graph",
-				"eamodio.gitlens"
+				"eamodio.gitlens",
+				"dbaeumer.vscode-eslint"
 			]
 		}
 	},

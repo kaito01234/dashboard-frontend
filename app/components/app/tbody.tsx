@@ -1,62 +1,53 @@
 import Image from 'next/image'
 import localImage from '@/public/pc.png'
+import E2EStatus from '@/app/components/app/e2eresult'
+import Status from '@/app/components/app/status'
 
 export type TableData = {
-  Nane: string
-  Branch: string
-  State: string
-  Url: string
-  Priority: number
-  CreateData: string
+  id: string
+  name: string
+  branch: string
+  url: string
+  status: string
+  e2e: string
+  priority: string
+  createData: string
 }
 
 export default function TableBody({ tableData }: { tableData: TableData }) {
   return (
     <tr className="hover:bg-gray-50">
-      <td className="px-3 py-0">
+      <td className="pl-6 py-0">
         <div className="relative h-10 w-10">
-          <Image
-            className="h-full w-full rounded-full object-cover object-center"
-            src={localImage}
-            alt="image"
-          />
+          <Image className="h-full w-full rounded-full object-cover object-center" src={localImage} alt="image" />
         </div>
       </td>
-      <td className="px-6 py-4 font-medium text-gray-900">{tableData.Nane}</td>
-      <td className="px-6 py-4 font-medium">{tableData.Branch}</td>
-      <td className="px-6 py-4">
-        <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="h-3 w-3"
-          >
-            <path
-              fillRule="evenodd"
-              d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-              clipRule="evenodd"
-            />
-          </svg>
-          {tableData.State}
-        </span>
+      <td className="px-6 py-4 font-medium text-gray-900">{tableData.name}</td>
+      <td className="px-6 py-4 font-medium">
+        <a href={`https://github.com/kaito01234/frontend-study/tree/${tableData.branch}`}>{tableData.branch}</a>
       </td>
       <td className="px-6 py-4 text-blue-600 font-medium">
         <div className="flex flex-col">
-          <a target="_blank" href={'https://' + tableData.Url}>
+          <a target="_blank" href={`https://${tableData.url}`}>
             employee
           </a>
-          <a target="_blank" href={'https://' + tableData.Url}>
+          <a target="_blank" href={`https://${tableData.url}`}>
             administrator
           </a>
         </div>
       </td>
-      <td className="items-center gap-4 px-6 py-4 font-medium">
+      <td className="px-6 py-4">
+        <Status status={tableData.status} />
+      </td>
+      <td className="px-6 py-4">
+        <E2EStatus status={tableData.e2e} />
+      </td>
+      <td className="px-6 py-4 font-medium items-center gap-4">
         <div className="flex justify-end object-right">
-          <a href="" className="px-2">
+          <a href="https://example.com" className="px-6">
             Detail
           </a>
-          <a href="" className="px-2 text-red-500">
+          <a href="https://example.com" className="px-6 text-red-500">
             Delete
           </a>{' '}
         </div>

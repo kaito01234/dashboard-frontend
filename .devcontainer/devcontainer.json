@@ -1,19 +1,34 @@
 {
-	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-vscode.vscode-typescript-next",
-				"leizongmin.node-module-intellisense",
-				"mhutchie.git-graph",
-				"eamodio.gitlens",
-				"dbaeumer.vscode-eslint"
-			]
-		}
-	},
-	"features": {
-		"ghcr.io/devcontainers-contrib/features/volta:1": {}
-	},
-	"postCreateCommand": "volta setup"
+  "name": "EnvironmentDashboard",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "leizongmin.node-module-intellisense",
+        "ms-vscode.vscode-typescript-next",
+        "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-docker",
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "shardulm94.trailing-spaces"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "enableNonRootDocker": "true",
+      "moby": "true"
+    },
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers-contrib/features/volta:1": {}
+  },
+  "postCreateCommand": ".devcontainer/postCreateCommand.sh"
 }

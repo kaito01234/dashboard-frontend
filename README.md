@@ -12,3 +12,5 @@ aws dynamodb list-tables --endpoint-url=http://host.docker.internal:4566
 aws dynamodb delete-table \
  --table-name TemporaryEnvironment \
  --endpoint-url=http://host.docker.internal:4566
+
+npx cdklocal bootstrap --endpoint-url=http://host.docker.internal:4566

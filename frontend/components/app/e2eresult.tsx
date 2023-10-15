@@ -1,4 +1,4 @@
-import { E2EResultStatus } from '@/app/enum/e2eResultStatus'
+import { E2EResultStatus } from '@/enum/e2eResultStatus';
 
 export default function E2EResult({ status }: { status: string }) {
   return (
@@ -34,5 +34,5 @@ export default function E2EResult({ status }: { status: string }) {
         </span>
       )}
     </div>
-  )
+  );
 }

@@ -1,18 +1,18 @@
-import Image from 'next/image'
-import localImage from '@/public/pc.png'
-import E2EStatus from '@/app/components/app/e2eresult'
-import Status from '@/app/components/app/status'
+import Image from 'next/image';
+import localImage from '@/public/pc.png';
+import E2EStatus from '@/components/app/e2eresult';
+import Status from '@/components/app/status';
 
 export type TableData = {
-  id: string
-  name: string
-  branch: string
-  url: string
-  status: string
-  e2e: string
-  priority: string
-  createData: string
-}
+  id: string;
+  name: string;
+  branch: string;
+  url: string;
+  status: string;
+  e2e: string;
+  priority: string;
+  createData: string;
+};
 
 export default function TableBody({ tableData }: { tableData: TableData }) {
   return (
@@ -53,5 +53,5 @@ export default function TableBody({ tableData }: { tableData: TableData }) {
         </div>
       </td>
     </tr>
-  )
+  );
 }

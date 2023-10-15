@@ -24,7 +24,36 @@ StepFunction 実行
 
 # StepFunction
 
-start
-migrate
-codebuild cfn
-wait ec2
+-create
+
+dynamo status create
+codebuild migrate reset
+cfn create stack ec2 + pipeline
+cfn status check
+pipeline status check
+dynamo status success
+
+failed
+dynamo status failed
+cfn delete stack
+
+-delete
+
+success
+dynamo status delete
+cfn delete stack
+dynamo delete
+
+failed
+dynamo statu delete failed
+
+-reboot
+
+dynamo reboot
+ec2 delete
+ec2 status running
+dynamo success
+
+-status
+
+lambda dynamo scan

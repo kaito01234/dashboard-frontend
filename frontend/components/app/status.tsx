@@ -1,4 +1,4 @@
-import { EnvStatus } from '@/app/enum/envStatus'
+import { EnvStatus } from '@/enum/envStatus';
 
 export default function Status({ status }: { status: string }) {
   return (
@@ -16,5 +16,5 @@ export default function Status({ status }: { status: string }) {
         </span>
       )}
     </div>
-  )
+  );
 }

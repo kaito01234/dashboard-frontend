@@ -1,25 +1,25 @@
-import crypto from 'crypto'
-import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
-import { redirect } from 'next/navigation'
-import { E2EResultStatus } from '@/app/enum/e2eResultStatus'
-import { EnvStatus } from '@/app/enum/envStatus'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-import timezone from 'dayjs/plugin/timezone'
+import crypto from 'crypto';
+import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import { redirect } from 'next/navigation';
+import { E2EResultStatus } from '@/enum/e2eResultStatus';
+import { EnvStatus } from '@/enum/envStatus';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
 export default async function Home() {
   async function create(formData: FormData) {
-    'use server'
+    'use server';
 
-    dayjs.extend(utc)
-    dayjs.extend(timezone)
-    dayjs.tz.setDefault('Asia/Tokyo')
+    dayjs.extend(utc);
+    dayjs.extend(timezone);
+    dayjs.tz.setDefault('Asia/Tokyo');
 
-    const name = formData.get('name') ?? ''
-    const branch = formData.get('branch') ?? ''
-    const url = formData.get('url') ?? ''
+    const name = formData.get('name') ?? '';
+    const branch = formData.get('branch') ?? '';
+    const url = formData.get('url') ?? '';
 
-    const client = new DynamoDBClient({ region: 'ap-northeast-1', endpoint: 'http://host.docker.internal:4566' })
+    const client = new DynamoDBClient({ region: 'ap-northeast-1', endpoint: 'http://host.docker.internal:4566' });
     const command = new PutItemCommand({
       TableName: 'TemporaryEnvironment',
       Item: {
@@ -32,9 +32,9 @@ export default async function Home() {
         priority: { S: crypto.randomInt(1, 50000).toString() },
         createData: { S: dayjs().tz().format() },
       },
-    })
-    const response = await client.send(command)
-    redirect('/')
+    });
+    const response = await client.send(command);
+    redirect('/');
   }
 
   return (
@@ -76,5 +76,5 @@ export default async function Home() {
         </button>
       </form>
     </div>
-  )
+  );
 }

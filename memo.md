@@ -28,7 +28,7 @@ StepFunction 実行
 
 dynamo status create
 codebuild migrate reset
-cfn create stack ec2 + pipeline
+cfn create stack ec2
 cfn status check
 pipeline status check
 dynamo status success
@@ -53,7 +53,3 @@ dynamo reboot
 ec2 delete
 ec2 status running
 dynamo success
-
--status
-
-lambda dynamo scan

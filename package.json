@@ -1,7 +1,31 @@
 {
-  "name": "dashboard",
+  "name": "dashboard-frontend",
   "version": "0.1.0",
-  "volta": {
-    "node": "20.8.0"
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.428.0",
+    "@types/node": "20.8.4",
+    "@types/react": "18.2.28",
+    "@types/react-dom": "18.2.13",
+    "autoprefixer": "10.4.16",
+    "aws-crt": "^1.18.0",
+    "dayjs": "^1.11.10",
+    "eslint": "8.51.0",
+    "eslint-config-next": "13.5.4",
+    "next": "13.5.4",
+    "postcss": "8.4.31",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "npm-check-updates": "^16.14.6"
   }
 }

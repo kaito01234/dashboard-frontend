@@ -28,7 +28,7 @@
       "moby": "true"
     },
     "ghcr.io/devcontainers/features/aws-cli:1": {},
-    "ghcr.io/devcontainers/features/node:1": {}
+    "ghcr.io/devcontainers-contrib/features/volta:1": {}
   },
   "postCreateCommand": ".devcontainer/postCreateCommand.sh"
 }

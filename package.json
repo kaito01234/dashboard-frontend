@@ -27,5 +27,8 @@
   },
   "devDependencies": {
     "npm-check-updates": "^16.14.6"
+  },
+  "volta": {
+    "node": "20.8.1"
   }
 }

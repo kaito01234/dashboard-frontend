@@ -21,35 +21,3 @@ EC2 を削除して再作成する
 ## Create
 
 StepFunction 実行
-
-# StepFunction
-
--create
-
-dynamo status create
-codebuild migrate reset
-cfn create stack ec2
-cfn status check
-pipeline status check
-dynamo status success
-
-failed
-dynamo status failed
-cfn delete stack
-
--delete
-
-success
-dynamo status delete
-cfn delete stack
-dynamo delete
-
-failed
-dynamo statu delete failed
-
--reboot
-
-dynamo reboot
-ec2 delete
-ec2 status running
-dynamo success

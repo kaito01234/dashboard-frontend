@@ -4,7 +4,7 @@ import axios from 'axios';
 import { redirect } from 'next/navigation';
 
 export async function deleteEnv(id: string, url: string) {
-  const requestUrl = process.env.TEMPORARY_URL ?? '';
+  const requestUrl = process.env.TEMPORARY_URL ?? 'https://example.com';
   await axios.delete(`${requestUrl}`, {
     data: { id: id, url: url },
   });

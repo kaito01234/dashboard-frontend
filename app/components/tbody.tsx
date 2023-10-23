@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import localImage from '@/public/pc.png';
-import E2EStatus from '@/components/app/e2eresult';
-import Status, { EnvStatus } from '@/components/app/status';
+import E2EStatus from '@/app/components/e2eresult';
+import Status, { EnvStatus } from '@/app/components/status';
 import { DeleteModal } from './deleteModal';
 import Link from 'next/link';
 import { DetailModal } from './detailModal';

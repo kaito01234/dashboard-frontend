@@ -1,33 +1,37 @@
+import axios from 'axios';
 import TableBody, { TableData } from '@/components/app/tbody';
-import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
-import dayjs from 'dayjs';
 
 async function getData() {
   'use server';
 
-  const client = new DynamoDBClient();
-  const command = new ScanCommand({ TableName: process.env.TABLE_NAME });
-  const response = await client.send(command);
+  const requestUrl = process.env.TEMPORARY_URL ?? '';
+  const response = await axios.get(requestUrl);
+
   const tableList: TableData[] =
-    response.Items?.map(function (item) {
+    response.data.result.map(function (item: any) {
       return {
-        id: item.id?.S ?? '',
-        name: item.name?.S ?? '',
-        branch: item.branch?.S ?? '',
-        url: item.url?.S ?? '',
-        status: item.status?.S ?? '',
-        e2e: item.e2e?.S ?? '',
-        priority: item.priority?.S ?? '',
-        createData: item.createData?.S ?? '',
+        id: item.id,
+        name: item.name,
+        branch: item.branch,
+        url: item.url,
+        envStatus: item.envStatus,
+        e2e: item.e2e,
+        priority: item.priority,
+        createData: item.createData,
       };
     }) ?? [];
-  return tableList.sort(function (a, b) {
-    return dayjs(a.createData) < dayjs(b.createData) ? -1 : 1; //オブジェクトの昇順ソート
-  });
+
+  return tableList;
 }
 
-export default async function Home() {
+type Props = {
+  searchParams: Record<string, string> | null | undefined;
+};
+
+export default async function Home({ searchParams }: Props) {
   const tableList: TableData[] = await getData();
+  const deleteModal: string | undefined = searchParams?.delete;
+  const detailModal: string | undefined = searchParams?.detail;
 
   return (
     <div className="p-8">
@@ -56,7 +60,14 @@ export default async function Home() {
           </thead>
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
             {tableList.map((tableData) => (
-              <TableBody key="body" tableData={tableData} />
+              <TableBody
+                key="body"
+                deleteModal={tableData.id === deleteModal ? true : false}
+                detailModal={tableData.id === detailModal ? true : false}
+                tableData={tableData}
+                url1_name={process.env.LINK_NAME_1 ?? 'URL1'}
+                url2_name={process.env.LINK_NAME_2 ?? 'URL2'}
+              />
             ))}
           </tbody>
         </table>

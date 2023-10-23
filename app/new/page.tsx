@@ -1,45 +1,25 @@
-import crypto from 'crypto';
-import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import axios from 'axios';
 import { redirect } from 'next/navigation';
-import { E2EResultStatus } from '@/enum/e2eResultStatus';
-import { EnvStatus } from '@/enum/envStatus';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+
+async function createEnv(formData: FormData) {
+  'use server';
+
+  const requestUrl = process.env.TEMPORARY_URL ?? '';
+  await axios.post(requestUrl, {
+    name: formData.get('name') ?? '',
+    branch: formData.get('branch') ?? '',
+    url: formData.get('url') ?? '',
+  });
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  redirect('/');
+}
 
 export default async function Home() {
-  async function create(formData: FormData) {
-    'use server';
-
-    dayjs.extend(utc);
-    dayjs.extend(timezone);
-    dayjs.tz.setDefault('Asia/Tokyo');
-
-    const name = formData.get('name') ?? '';
-    const branch = formData.get('branch') ?? '';
-    const url = formData.get('url') ?? '';
-
-    const client = new DynamoDBClient({ region: 'ap-northeast-1', endpoint: 'http://host.docker.internal:4566' });
-    const command = new PutItemCommand({
-      TableName: 'TemporaryEnvironment',
-      Item: {
-        id: { S: crypto.randomUUID() },
-        name: { S: name.toString() },
-        branch: { S: branch.toString() },
-        url: { S: url.toString() },
-        status: { S: EnvStatus.InProgress },
-        e2e: { S: E2EResultStatus.Untested },
-        priority: { S: crypto.randomInt(1, 50000).toString() },
-        createData: { S: dayjs().tz().format() },
-      },
-    });
-    const response = await client.send(command);
-    redirect('/');
-  }
-
   return (
     <div className="p-8">
-      <form action={create}>
+      <form action={createEnv}>
         <div className="mb-6">
           <label className="block mb-2 text-sm font-medium text-gray-900">Name</label>
           <input

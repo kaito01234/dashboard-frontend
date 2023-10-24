@@ -1,33 +1,37 @@
-import axios from 'axios';
 import TableBody, { TableData } from '@/app/components/tbody';
+import axios from 'axios';
 
 type Props = {
   searchParams: Record<string, string> | null | undefined;
 };
 
+async function getData() {
+  const requestUrl = process.env.TEMPORARY_URL ?? 'https://example.com';
+  const response = await axios.get(requestUrl);
+
+  const tableList: TableData[] =
+    response.data.result.map(function (item: any) {
+      return {
+        id: item.id,
+        name: item.name,
+        branch: item.branch,
+        url: item.url,
+        envStatus: item.envStatus,
+        e2e: item.e2e,
+        priority: item.priority,
+        createData: item.createData,
+      };
+    }) ?? [];
+
+  return tableList;
+}
+
 export default async function Home({ searchParams }: Props) {
-  async function getData() {
-    const requestUrl = process.env.TEMPORARY_URL ?? 'https://example.com';
-    const response = await axios.get(requestUrl);
+  const requestUrl = process.env.TEMPORARY_URL ?? 'https://example.com';
+  const notes = await fetch(requestUrl, { cache: 'no-store' });
+  const tableList: { result: TableData[] } = await notes.json();
 
-    const tableList: TableData[] =
-      response.data.result.map(function (item: any) {
-        return {
-          id: item.id,
-          name: item.name,
-          branch: item.branch,
-          url: item.url,
-          envStatus: item.envStatus,
-          e2e: item.e2e,
-          priority: item.priority,
-          createData: item.createData,
-        };
-      }) ?? [];
-
-    return tableList;
-  }
-
-  const tableList: TableData[] = await getData();
+  // const tableList: TableData[] = await getData();
   const deleteModal: string | undefined = searchParams?.delete;
   const detailModal: string | undefined = searchParams?.detail;
 
@@ -57,7 +61,7 @@ export default async function Home({ searchParams }: Props) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-            {tableList.map((tableData) => (
+            {tableList.result.map((tableData) => (
               <TableBody
                 key="body"
                 deleteModal={tableData.id === deleteModal ? true : false}
@@ -73,3 +77,5 @@ export default async function Home({ searchParams }: Props) {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';

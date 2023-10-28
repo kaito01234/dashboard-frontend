@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  app:
+    build:
+      dockerfile: Dockerfile
+    image: dashboard
+    ports:
+      - 3000:3000
+    env_file:
+      - .env.development.local
+
   localstack:
     image: localstack/localstack:0.12.20
     ports:

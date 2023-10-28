@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 async function createEnv(formData: FormData) {
   'use server';
 
-  const requestUrl = process.env.TEMPORARY_URL ?? 'https://example.com';
+  const requestUrl = process.env.BACKEND_BASE_URL ?? 'https://example.com';
   await axios.post(requestUrl, {
     name: formData.get('name') ?? '',
     branch: formData.get('branch') ?? '',

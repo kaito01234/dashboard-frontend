@@ -9,17 +9,3 @@ services:
       - 3000:3000
     env_file:
       - .env.development.local
-
-  localstack:
-    image: localstack/localstack:0.12.20
-    ports:
-      - 4566:4566
-    environment:
-      - SERVICES=dynamodb
-      - DEFAULT_REGION=ap-northeast-1
-      - DATA_DIR=/tmp/localstack/data
-    volumes:
-      - localstack:/tmp/localstack/
-
-volumes:
-  localstack:

@@ -6,7 +6,7 @@ type Props = {
 };
 
 async function getData() {
-  const requestUrl = process.env.TEMPORARY_URL ?? 'https://example.com';
+  const requestUrl = process.env.BACKEND_BASE_URL ?? 'https://example.com';
   const response = await axios.get(requestUrl);
 
   const tableList: TableData[] =
@@ -27,7 +27,7 @@ async function getData() {
 }
 
 export default async function Home({ searchParams }: Props) {
-  const requestUrl = process.env.TEMPORARY_URL ?? 'https://example.com';
+  const requestUrl = process.env.BACKEND_BASE_URL ?? 'https://example.com';
   const notes = await fetch(requestUrl, { cache: 'no-store' });
   const tableList: { result: TableData[] } = await notes.json();
 

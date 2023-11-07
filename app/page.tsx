@@ -27,11 +27,7 @@ async function getData() {
 }
 
 export default async function Home({ searchParams }: Props) {
-  const requestUrl = process.env.BACKEND_BASE_URL ?? 'https://example.com';
-  const notes = await fetch(requestUrl, { cache: 'no-store' });
-  const tableList: { result: TableData[] } = await notes.json();
-
-  // const tableList: TableData[] = await getData();
+  const tableList: TableData[] = await getData();
   const deleteModal: string | undefined = searchParams?.delete;
   const detailModal: string | undefined = searchParams?.detail;
 
@@ -61,7 +57,7 @@ export default async function Home({ searchParams }: Props) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-            {tableList.result.map((tableData) => (
+            {tableList.map((tableData) => (
               <TableBody
                 key="body"
                 deleteModal={tableData.id === deleteModal ? true : false}

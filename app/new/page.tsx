@@ -5,11 +5,19 @@ async function createEnv(formData: FormData) {
   'use server';
 
   const requestUrl = process.env.BACKEND_BASE_URL ?? 'https://example.com';
-  await axios.post(requestUrl, {
-    name: formData.get('name') ?? '',
-    branch: formData.get('branch') ?? '',
-    url: formData.get('url') ?? '',
-  });
+  const requestHeaders = {
+    'Content-Type': 'application/json',
+    'x-api-key': process.env.BACKEND_API_KEY,
+  };
+  await axios.post(
+    requestUrl,
+    {
+      name: formData.get('name') ?? '',
+      branch: formData.get('branch') ?? '',
+      url: formData.get('url') ?? '',
+    },
+    { headers: requestHeaders }
+  );
 
   await new Promise((resolve) => setTimeout(resolve, 3000));
 

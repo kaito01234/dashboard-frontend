@@ -7,7 +7,11 @@ type Props = {
 
 async function getData() {
   const requestUrl = process.env.BACKEND_BASE_URL ?? 'https://example.com';
-  const response = await axios.get(requestUrl);
+  const requestHeaders = {
+    'Content-Type': 'application/json',
+    'x-api-key': process.env.BACKEND_API_KEY,
+  };
+  const response = await axios.get(requestUrl, { headers: requestHeaders });
 
   const tableList: TableData[] =
     response.data.result.map(function (item: any) {

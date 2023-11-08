@@ -36,8 +36,8 @@ export default async function Home({ searchParams }: Props) {
   const detailModal: string | undefined = searchParams?.detail;
 
   return (
-    <div className="p-8">
-      <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md">
+    <div className="flex justify-center p-8">
+      <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md flex-1 max-w-screen-xl">
         <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
           <thead className="bg-gray-50">
             <tr>

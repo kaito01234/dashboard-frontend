@@ -56,9 +56,22 @@ export default function TableBody({ deleteModal, detailModal, tableData, url1_na
           </Link>
           {detailModal && <DetailModal id={tableData.id} priority={tableData.priority} createData={tableData.createData} />}
           <Link
-            style={{ pointerEvents: tableData.envStatus === EnvStatus.Creating ? 'all' : 'none' }}
+            style={{
+              pointerEvents:
+                tableData.envStatus === EnvStatus.Creating ||
+                tableData.envStatus === EnvStatus.Running ||
+                tableData.envStatus === EnvStatus.Failure
+                  ? 'all'
+                  : 'none',
+            }}
             href={`/?delete=${tableData.id}`}
-            className={tableData.envStatus === EnvStatus.Creating ? 'px-6 text-red-500' : 'px-6 text-gray-300'}
+            className={
+              tableData.envStatus === EnvStatus.Creating ||
+              tableData.envStatus === EnvStatus.Running ||
+              tableData.envStatus === EnvStatus.Failure
+                ? 'px-6 text-red-500'
+                : 'px-6 text-gray-300'
+            }
           >
             Delete
           </Link>

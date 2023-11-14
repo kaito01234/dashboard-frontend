@@ -41,8 +41,8 @@ export default function Status({ status }: { status: string }) {
         </span>
       )}
       {status === EnvStatus.Deleting && (
-        <span className="inline-flex items-center bg-gray-100 text-gray-600 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">
-          <span className="w-2 h-2 mr-1 bg-gray-400 rounded-full"></span>
+        <span className="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">
+          <span className="w-2 h-2 mr-1 bg-red-500 rounded-full"></span>
           Deleting
         </span>
       )}

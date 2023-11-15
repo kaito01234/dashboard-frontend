@@ -17,13 +17,13 @@ async function getData() {
     response.data.result.map(function (item: any) {
       return {
         id: item.id,
-        name: item.name,
+        env_name: item.env_name,
         branch: item.branch,
         url: item.url,
-        envStatus: item.envStatus,
-        e2e: item.e2e,
+        env_status: item.env_status,
+        e2e_status: item.e2e_status,
         priority: item.priority,
-        createData: item.createData,
+        create_data: item.create_data,
       };
     }) ?? [];
 

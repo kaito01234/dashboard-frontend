@@ -12,7 +12,7 @@ async function createEnv(formData: FormData) {
   await axios.post(
     requestUrl,
     {
-      name: formData.get('name') ?? '',
+      env_name: formData.get('name') ?? '',
       branch: formData.get('branch') ?? '',
       url: formData.get('url') ?? '',
     },

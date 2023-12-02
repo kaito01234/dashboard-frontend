@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import localImage from '@/public/pc.png';
 import E2EStatus from '@/app/components/e2eresult';
 import Status, { EnvStatus } from '@/app/components/status';
-import { DeleteModal } from './deleteModal';
+import localImage from '@/public/pc.png';
+import Image from 'next/image';
 import Link from 'next/link';
-import { DetailModal } from './detailModal';
+import { DeleteModal } from './deleteModal';
+import { EditModal } from './editModal';
 
 export type TableData = {
   id: string;
@@ -17,9 +17,17 @@ export type TableData = {
   create_data: string;
 };
 
-type Props = { deleteModal: boolean; detailModal: boolean; tableData: TableData; url1_name: string; url2_name: string };
+type Props = {
+  deleteModal: boolean;
+  editModal: boolean;
+  tableData: TableData;
+  url1: string;
+  url1_name: string;
+  url2: string;
+  url2_name: string;
+};
 
-export default function TableBody({ deleteModal, detailModal, tableData, url1_name, url2_name }: Props) {
+export default function TableBody({ deleteModal, editModal, tableData, url1, url1_name, url2, url2_name }: Props) {
   return (
     <tr className="hover:bg-gray-50">
       <td className="pl-6 py-0">
@@ -35,10 +43,10 @@ export default function TableBody({ deleteModal, detailModal, tableData, url1_na
       </td>
       <td className="px-6 py-4 text-blue-600 font-medium">
         <div className="flex flex-col">
-          <a target="_blank" href={`https://${tableData.url}-${process.env.LINK_URL_1}`}>
+          <a target="_blank" href={url1}>
             {url1_name}
           </a>
-          <a target="_blank" href={`https://${tableData.url}-${process.env.LINK_URL_2}`}>
+          <a target="_blank" href={url2}>
             {url2_name}
           </a>
         </div>
@@ -51,10 +59,10 @@ export default function TableBody({ deleteModal, detailModal, tableData, url1_na
       </td>
       <td className="px-6 py-4 font-medium items-center gap-4">
         <div className="flex justify-end object-right">
-          <Link href={`/?detail=${tableData.id}`} className="px-6 text-blue-500">
-            Detail
+          <Link href={`/?edit=${tableData.id}`} className="px-6 text-blue-500">
+            Edit
           </Link>
-          {detailModal && <DetailModal id={tableData.id} priority={tableData.priority} createData={tableData.create_data} />}
+          {editModal && <EditModal tabledata={tableData} />}
           <Link
             style={{
               pointerEvents:

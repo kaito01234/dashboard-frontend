@@ -33,7 +33,7 @@ async function getData() {
 export default async function Home({ searchParams }: Props) {
   const tableList: TableData[] = await getData();
   const deleteModal: string | undefined = searchParams?.delete;
-  const detailModal: string | undefined = searchParams?.detail;
+  const editModal: string | undefined = searchParams?.edit;
 
   return (
     <div className="flex justify-center p-8">
@@ -65,10 +65,12 @@ export default async function Home({ searchParams }: Props) {
               <TableBody
                 key="body"
                 deleteModal={tableData.id === deleteModal ? true : false}
-                detailModal={tableData.id === detailModal ? true : false}
+                editModal={tableData.id === editModal ? true : false}
                 tableData={tableData}
-                url1_name={process.env.LINK_NAME_1 ?? 'URL1'}
-                url2_name={process.env.LINK_NAME_2 ?? 'URL2'}
+                url1={`https://${tableData.url}-${process.env.NEXT_PUBLIC_LINK_URL_1}`}
+                url1_name={process.env.NEXT_PUBLIC_LINK_NAME_1 ?? 'URL1'}
+                url2={`https://${tableData.url}-${process.env.NEXT_PUBLIC_LINK_URL_2}`}
+                url2_name={process.env.NEXT_PUBLIC_LINK_NAME_2 ?? 'URL2'}
               />
             ))}
           </tbody>

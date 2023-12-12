@@ -32,7 +32,7 @@ export default async function Home() {
         <form action={createEnv}>
           <FormInput label="Name" name="name" />
           <FormInput label="Branch" name="branch" />
-          <FormInput label="URL" name="url" url={true} />
+          <FormInput label="URL" name="url" url={true} maxLength={20} />
           <button
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"

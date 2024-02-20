@@ -11,6 +11,7 @@ export type TableData = {
   env_name: string;
   branch: string;
   url: string;
+  instance_type: string;
   env_status: string;
   e2e_status: string;
   priority: string;

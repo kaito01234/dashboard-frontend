@@ -20,6 +20,7 @@ async function getData() {
         env_name: item.env_name,
         branch: item.branch,
         url: item.url,
+        instance_type: item.instance_type,
         env_status: item.env_status,
         e2e_status: item.e2e_status,
         priority: item.priority,

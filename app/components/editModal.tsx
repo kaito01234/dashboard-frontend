@@ -94,6 +94,17 @@ export function EditModal({ tabledata }: { tabledata: TableData }) {
                 />
               </div>
               <div>
+                <label className="block mb-2 text-sm font-medium text-gray-900">InstanceType</label>
+                <input
+                  type="text"
+                  name="instance_type"
+                  className="bg-gray-200 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed"
+                  required
+                  readOnly
+                  defaultValue={tabledata.instance_type}
+                />
+              </div>
+              <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900">Priority</label>
                 <input
                   type="text"

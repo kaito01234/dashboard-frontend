@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { redirect } from 'next/navigation';
 import { FormInput } from '../components/new/formInput';
+import { FormSelect } from '../components/new/formSelect';
 
 async function createEnv(formData: FormData) {
   'use server';
@@ -16,6 +17,7 @@ async function createEnv(formData: FormData) {
       env_name: formData.get('name') ?? '',
       branch: formData.get('branch') ?? '',
       url: formData.get('url') ?? '',
+      instance_type: formData.get('instance_type') ?? '',
     },
     { headers: requestHeaders }
   );
@@ -33,6 +35,7 @@ export default async function Home() {
           <FormInput label="Name" name="name" />
           <FormInput label="Branch" name="branch" />
           <FormInput label="URL" name="url" url={true} maxLength={20} />
+          <FormSelect label="InstanceType" name="instance_type" />
           <button
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
